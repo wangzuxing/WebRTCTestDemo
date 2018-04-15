@@ -11,6 +11,7 @@
 package org.appspot.apprtc;
 
 import android.annotation.SuppressLint;
+import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHeadset;
@@ -96,6 +97,7 @@ public class AppRTCBluetoothManager {
     // connection and perform other operations that are relevant to the headset profile.
     public void onServiceConnected(int profile, BluetoothProfile proxy) {
       if (profile == BluetoothProfile.A2DP) {
+          BluetoothA2dp a2dp = (BluetoothA2dp) proxy;
           Log.d(TAG, "BluetoothServiceListener.onServiceConnected: profile == BluetoothProfile.A2DP");
       }
       if ( bluetoothState == State.UNINITIALIZED) {
