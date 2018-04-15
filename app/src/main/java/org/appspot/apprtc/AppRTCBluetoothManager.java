@@ -259,6 +259,12 @@ public class AppRTCBluetoothManager {
       Log.e(TAG, "BluetoothAdapter.getProfileProxy(HEADSET) failed");
       return;
     }
+
+    if (!getBluetoothProfileProxy(
+              apprtcContext, bluetoothServiceListener, BluetoothProfile.A2DP)) {
+          Log.e(TAG, "BluetoothAdapter.getProfileProxy(A2DP) failed");
+          return;
+    }
     // Register receivers for BluetoothHeadset change notifications.
     IntentFilter bluetoothHeadsetFilter = new IntentFilter();
     // Register receiver for change in connection state of the Headset profile.
