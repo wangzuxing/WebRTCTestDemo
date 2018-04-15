@@ -95,14 +95,19 @@ public class AppRTCBluetoothManager {
     // Once we have the profile proxy object, we can use it to monitor the state of the
     // connection and perform other operations that are relevant to the headset profile.
     public void onServiceConnected(int profile, BluetoothProfile proxy) {
-      if (profile != BluetoothProfile.HEADSET || bluetoothState == State.UNINITIALIZED) {
-        return;
+      if (profile == BluetoothProfile.A2DP) {
+          Log.d(TAG, "BluetoothServiceListener.onServiceConnected: profile == BluetoothProfile.A2DP");
       }
-      Log.d(TAG, "BluetoothServiceListener.onServiceConnected: BT state=" + bluetoothState);
-      // Android only supports one connected Bluetooth Headset at a time.
-      bluetoothHeadset = (BluetoothHeadset) proxy;
-      updateAudioDeviceState();
-      Log.d(TAG, "onServiceConnected done: BT state=" + bluetoothState);
+      if ( bluetoothState == State.UNINITIALIZED) {
+          return;
+      }
+      if (profile == BluetoothProfile.HEADSET ) {
+          Log.d(TAG, "BluetoothServiceListener.onServiceConnected: BT state=" + bluetoothState);
+          // Android only supports one connected Bluetooth Headset at a time.
+          bluetoothHeadset = (BluetoothHeadset) proxy;
+          updateAudioDeviceState();
+          Log.d(TAG, "onServiceConnected done: BT state=" + bluetoothState);
+      }
     }
 
     @Override
